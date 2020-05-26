@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
+import {ReactComponent as Check} from './check.svg'
 
 const initialStories = [
     {
@@ -132,12 +133,10 @@ const App = () => {
 
 
   return (
-    <div className="App">
-      <h1>My Hacker Stories</h1>
+    <div className="container">
+      <h1 className="headline-primary">My Hacker Stories</h1>
 
       <SearchForm searchTerm={searchTerm} onSearchInput={handleSearchInput} onSearchSubmit={handleSearchSubmit} />
-
-      <hr />
 
       {stories.isError && <p>Something went wrong ...</p>}
       
@@ -161,9 +160,9 @@ const InputWithLabel = ({id, value, type="text", onInputChange, isFocused, child
 
   return(
     <>
-      <label htmlFor={id}>{children}</label>
+      <label htmlFor={id} className="label">{children}</label>
       &nbsp;
-      <input ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} />
+      <input ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} className="input"/>
     </>
   );
 }
@@ -178,7 +177,7 @@ const List = ({list, onRemoveItem}) =>
 const Item = ({item, onRemoveItem}) => {
   
   return (
-    <div>
+    <div className="item">
       <span>
         <a href={item.url}>{item.title}</a>
       </span>
@@ -186,8 +185,8 @@ const Item = ({item, onRemoveItem}) => {
       <span>{item.num_comments}</span>
       <span>{item.points}</span>
       <span>
-        <button type="button" onClick={onRemoveItem.bind(null, item)}>
-          Dismiss
+        <button type="button" onClick={onRemoveItem.bind(null, item)} className="button button_small">
+          <Check height="18px" width="18px" />
         </button>
       </span>
     </div>
@@ -197,12 +196,12 @@ const Item = ({item, onRemoveItem}) => {
 
 const SearchForm = ({searchTerm, onSearchInput, onSearchSubmit}) => 
 (
-  <form onSubmit={onSearchSubmit}>
+  <form onSubmit={onSearchSubmit} className="search-form">
     <InputWithLabel id="search" lable="Search" value={searchTerm} isFocused onInputChange={onSearchInput}>
       <strong>Search:</strong>
     </InputWithLabel>
 
-    <button type="submit" disabled={!searchTerm}>
+    <button type="submit" disabled={!searchTerm} className="button button_large">
       Submit
     </button>
   </form>
