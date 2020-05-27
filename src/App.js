@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
-import {ReactComponent as Check} from './check.svg'
+
+import SearchForm from './SearchForm';
+import List from './List';
 
 const initialStories = [
     {
@@ -146,66 +148,7 @@ const App = () => {
 }
 
 
-const InputWithLabel = ({id, value, type="text", onInputChange, isFocused, children}) => {
-
-  const inputRef = React.useRef();
-
-  React.useEffect(() => {
-    if (isFocused && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFocused]);
-
-
-
-  return(
-    <>
-      <label htmlFor={id} className="label">{children}</label>
-      &nbsp;
-      <input ref={inputRef} id={id} type={type} value={value} onChange={onInputChange} className="input"/>
-    </>
-  );
-}
-
-
-
-const List = ({list, onRemoveItem}) =>
-  list.map((item) => (<Item key={item.objectID} item={item} onRemoveItem={onRemoveItem}/>));
-
-
-
-const Item = ({item, onRemoveItem}) => {
-  
-  return (
-    <div className="item">
-      <span>
-        <a href={item.url}>{item.title}</a>
-      </span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-      <span>
-        <button type="button" onClick={onRemoveItem.bind(null, item)} className="button button_small">
-          <Check height="18px" width="18px" />
-        </button>
-      </span>
-    </div>
-  );
-}
-
-
-const SearchForm = ({searchTerm, onSearchInput, onSearchSubmit}) => 
-(
-  <form onSubmit={onSearchSubmit} className="search-form">
-    <InputWithLabel id="search" lable="Search" value={searchTerm} isFocused onInputChange={onSearchInput}>
-      <strong>Search:</strong>
-    </InputWithLabel>
-
-    <button type="submit" disabled={!searchTerm} className="button button_large">
-      Submit
-    </button>
-  </form>
-);
-
-
 export default App;
+
+// for testing
+// export {SearchForm, InputWithLabel, List, Item};
